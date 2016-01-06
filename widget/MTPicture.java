@@ -1,19 +1,17 @@
 package widget;
 
 import java.awt.Graphics2D;
-
-/**
- * Class to define a component who is a picture
- * @author LEPRETRE Rémy and STAMPER Corentin
- *
- */
-
 import java.awt.Image;
 import java.io.File;
 
 import javax.imageio.ImageIO;
 
 import mygeom.Vector2;
+/**
+ * Class to define a component who is a picture
+ * @author LEPRETRE Rémy and STAMPER Corentin
+ *
+ */
 
 public class MTPicture extends MTComponent {
 
@@ -28,6 +26,7 @@ public class MTPicture extends MTComponent {
 	 * @param imageName the name of the picture
 	 */
 	public MTPicture (String imageName) {
+		super();
 		img = null;
 		try {
 			img = ImageIO.read(new File(imageName));
@@ -36,15 +35,17 @@ public class MTPicture extends MTComponent {
 			System.out.println("Erreur : " + e.getMessage());
 			return;
 		}
-		setPosition(new Vector2(0, 0));
-		setWidth(img.getWidth(null));
-		setHeight(img.getHeight(null));
+		/*obb.setPosition(0, img.getWidth(null), img.getHeight(null), new Vector2(0.0, 0.0));
+		obb.setOrigine(new Vector2(0, 0));
+		obb.setWidth(img.getWidth(null));
+		obb.setHeight(img.getHeight(null));*/
 	}
 	
 	/**
 	 * {@inheritDoc}
 	 */
 	public void draw(Graphics2D g) {
-		g.drawImage(img, (int) getPosition().getX(), (int) getPosition().getY(), null);
+		System.out.println(obb.getOrigine().getX());
+		g.drawImage(img, (int) obb.getOrigine().getX(), (int) obb.getOrigine().getY(), null);
 	}
 }

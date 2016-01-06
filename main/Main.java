@@ -89,7 +89,7 @@ public class Main {
 		MTPicture pict = new MTPicture("data/Bird.jpg");
 		pict.addDiscreteEventListener(dListener);
 		pict.addSRTEventListener(srtListener);
-		pict.setPosition(Math.PI, pict.getWidth(), pict.getHeight(), new Vector2(250, 250));
+		pict.getObb().setPosition(Math.PI, pict.getWidth(), pict.getHeight(), new Vector2(250, 250));
 		pict.getObb().updatePosition(new Vector2(0, 0), 0, 2);
 		surf.add(pict);
 		
@@ -97,7 +97,7 @@ public class Main {
 		MTPicture pict2 = new MTPicture("data/Yellow_Tulips.jpg");
 		pict2.addDiscreteEventListener(dListener);
 		pict2.addSRTEventListener(srtListener);
-		pict2.setPosition(0, pict2.getWidth(), pict2.getHeight(), new Vector2(0, 0));
+		pict2.getObb().setPosition(0, pict2.getWidth(), pict2.getHeight(), new Vector2(0, 0));
 		surf.add(pict2);
 	}
 }

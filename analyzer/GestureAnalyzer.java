@@ -25,8 +25,7 @@ public class GestureAnalyzer {
 	public final static String STATE_ADD = "add";
 	public final static String STATE_UPDATE = "update";
 	public final static String STATE_REMOVE = "remove";
-
-	private InternalGestureState iGS;
+	
 	
 	//METHODS
 	/**
@@ -41,7 +40,7 @@ public class GestureAnalyzer {
 		if (STATE_ADD.equals(state)) {
 			if(bQ.nbCursors() == 1) {
 				add(comp, p, null);
-				iGS.recognizer.clear();
+				comp.getIgs().recognizer.clear();
 			}
 			if(bQ.nbCursors() == 2)
 				add(comp, null, p);
@@ -49,20 +48,20 @@ public class GestureAnalyzer {
 		} else if(STATE_UPDATE.equals(state)) {
 			if(bQ.nbCursors() == 1) {
 				update(comp, p, null);
-				comp.fireSRTPerformed(new SRTEvent(comp, iGS.computeTranslation(), 0, 1));
-				iGS.recognizer.add(p);
+				comp.fireSRTPerformed(new SRTEvent(comp, comp.getIgs().computeTranslation(), 0, 1));
+				comp.getIgs().recognizer.add(p);
 			} else if(bQ.nbCursors() == 2) {
 				Iterator<Entry<Integer, Path>> entry = bQ.getCursors().entrySet().iterator();
 				if(entry.next().getKey() == id)
 					update(comp, p, null);
 				if(entry.next().getKey() == id)
 					update(comp, null, p);
-				System.out.println("angle " + iGS.computeTRSRotation());
-				double angle = iGS.computeTRSRotation();
+				System.out.println("angle " + comp.getIgs().computeTRSRotation());
+				double angle = comp.getIgs().computeTRSRotation();
 				if (angle != 0)
-					comp.fireSRTPerformed(new SRTEvent(comp, new Vector2(0,0), iGS.computeTRSRotation(), iGS.computeTRSScale()));
+					comp.fireSRTPerformed(new SRTEvent(comp, new Vector2(0,0), comp.getIgs().computeTRSRotation(), comp.getIgs().computeTRSScale()));
 				else
-					comp.fireSRTPerformed(new SRTEvent(comp, iGS.computeTRSTranslate(), 0.0, iGS.computeTRSScale()));
+					comp.fireSRTPerformed(new SRTEvent(comp, comp.getIgs().computeTRSTranslate(), 0.0, comp.getIgs().computeTRSScale()));
 			}
 		} else if(STATE_REMOVE.equals(state)) {
 			if(bQ.nbCursors() == 0) {
@@ -81,11 +80,10 @@ public class GestureAnalyzer {
 	 * @param pB the VectorB
 	 */
 	private void add(MTComponent comp, Vector2 pA, Vector2 pB) {
-		iGS = new InternalGestureState(comp);
 		if(pA != null)
-			iGS.motionTranslateBegin(pA);
+			comp.getIgs().motionTranslateBegin(pA);
 		else
-			iGS.motionTRSBegin(pA, pB);
+			comp.getIgs().motionTRSBegin(pA, pB);
 	}
 
 	/**
@@ -96,15 +94,15 @@ public class GestureAnalyzer {
 	 */
 	private void update(MTComponent comp, Vector2 pA, Vector2 pB) {
 		if(pA != null)
-			iGS.motionTranslateUpdate(pA);
+			comp.getIgs().motionTranslateUpdate(pA);
 		else
-			iGS.motionTRSUpdate(pA, pB);
+			comp.getIgs().motionTRSUpdate(pA, pB);
 	}
 	
 	/**
 	 * clear the internalGestureState
 	 */
 	private void remove() {
-		iGS = null;
+		//iGS = null;   Est ce qu'on peut pas plutot clean dans la classe? Pourquoi on a besoin de remove? Faire un new ne serais pas suffisant?
 	}
 }

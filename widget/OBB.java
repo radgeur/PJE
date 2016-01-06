@@ -39,16 +39,34 @@ public class OBB {
 	public double getAngle() {return angle;}
 	
 	/**
+	 * Set the angle of the OBB
+	 * @param angle new
+	 */
+	public void setAngle(double angle){ this.angle = angle;}
+	
+	/**
 	 * Return the width of the OBB
-	 * @return int
+	 * @return double
 	 */
 	public double getWidth() {return width;}
 	
 	/**
+	 * Set the Width of the OBB
+	 * @param width new
+	 */
+	public void setWidth(double width) {this.width = width;}
+	
+	/**
 	 * Return the height of the OBB
-	 * @return int
+	 * @return double
 	 */
 	public double getHeight() {return height;}
+	
+	/**
+	 * Set the height of the OBB
+	 * @param height new
+	 */
+	public void setHeight(double height) {this.height = height;}
 	
 	/**
 	 * Return the position of the OBB
@@ -56,9 +74,15 @@ public class OBB {
 	 */
 	public Vector2 getOrigine() {return origine;}
 	
+	/**
+	 * Set the position of the OBB
+	 * @param origine new
+	 */
+	public void setOrigine(Vector2 origine) {this.origine = origine;}
+	
 
 	/**
-	 * Set all attributs of the OBB
+	 * Set all attributes of the OBB
 	 * @param angle
 	 * @param width
 	 * @param height
